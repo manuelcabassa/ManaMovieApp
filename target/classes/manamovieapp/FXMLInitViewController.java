@@ -1,6 +1,7 @@
 
 package manamovieapp;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -63,7 +64,7 @@ public class FXMLInitViewController implements Initializable {
     @FXML
     private TextField signUp_username;
     @FXML
-    private TextField signUp_city;
+    private TextField signUp_address;
     @FXML
     private TextField signUp_lastName;
     @FXML
@@ -76,7 +77,7 @@ public class FXMLInitViewController implements Initializable {
     private Statement statement;
     private ResultSet result;
     
-    public void signInn(){
+    public void signInn() throws SQLException, IOException{
         
         String sqlScript = "SELECT * FROM client WHERE username = ? and password = ?";
         Alert alert;
@@ -123,7 +124,6 @@ public class FXMLInitViewController implements Initializable {
                 
                 
                 Stage stage = new Stage();
-                stage.setUserData("mcabassa");
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
@@ -139,9 +139,95 @@ public class FXMLInitViewController implements Initializable {
             }
         }
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+        }finally
+        {
+         connect.close();
         }
+    }
+    
+    public void signUp() throws SQLException, IOException{
+        
+        String sqlScript = "INSERT INTO client(firstName, middleName, lastName, address, dateOfBirth, username, password, isAdmin) VALUES(?,?,?,?,?,?,?,?)";
+        Alert alert;
+        
+        connect = database.connectDb();
+
+        
+        if(connect == null){
+            alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Error connection with database");
+            alert.showAndWait();
+        }
+        
+        try{
+            
+        prepare = connect.prepareStatement(sqlScript);
+        prepare.setString(1, signUp_firstName.getText());
+        prepare.setString(2, signUp_middleName.getText());
+        prepare.setString(3, signUp_lastName.getText());
+        prepare.setString(4, signUp_address.getText());
+        prepare.setString(5, signUp_dateOfBirth.getText());
+        prepare.setString(6, signUp_username.getText());
+        prepare.setString(7, signUp_password.getText());
+        prepare.setString(8, "N");
+        
+        if(signUp_firstName.getText().isEmpty() ||signUp_lastName.getText().isEmpty() || signUp_address.getText().isEmpty() || signUp_dateOfBirth.getText().isEmpty() 
+                || signUp_username.getText().isEmpty() || signUp_password.getText().isEmpty())
+        {
+            alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill the fields, except middle name if you don´t have.");
+            alert.showAndWait();
+        }else if(signUp_password.getText().length() < 5)
+        {
+            alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Password need 5 or more characters.");
+            alert.showAndWait();
+        }else
+        {
+                prepare.execute();
+                alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Successfully Register in Mana Movie App!");
+                alert.showAndWait();
+                
+                
+                //Clean input text
+                signUp_firstName.setText("");
+                signUp_lastName.setText("");
+                signUp_middleName.setText("");
+                signUp_address.setText("");
+                signUp_dateOfBirth.setText("");
+                signUp_username.setText("");
+                signUp_password.setText("");
+                
+                signUp_form.getScene().getWindow().hide();
+                
+                Parent root = FXMLLoader.load(getClass().getResource("FXMLInitView.fxml"));
+                
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+        }
+            
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally
+        {
+         connect.close();
+        }
+    
+        
     }
     
     public void switchForm(ActionEvent event){

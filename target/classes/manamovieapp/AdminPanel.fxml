@@ -1,37 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="590.0" prefWidth="1135.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manamovieapp.AdminPanelController">
+<AnchorPane id="AnchorPane" prefHeight="608.0" prefWidth="1243.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manamovieapp.AdminPanelController">
    <children>
       <AnchorPane fx:id="adminPanel" layoutX="77.0" layoutY="95.0" prefHeight="590.0" prefWidth="1135.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="adminPanelCustomers" layoutX="99.0" layoutY="420.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="168.0" text="Customers" />
-            <Button fx:id="adminPanelRentals" layoutX="826.0" layoutY="420.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="168.0" text="Rentals" />
-            <Button fx:id="adminPanelMovies" layoutX="484.0" layoutY="420.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="168.0" text="Movies" />
-            <ImageView fitHeight="212.0" fitWidth="325.0" layoutX="37.0" layoutY="163.0">
+            <Button fx:id="BtnadminPanelCustomers" layoutX="127.0" layoutY="414.0" mnemonicParsing="false" onAction="#customersView" prefHeight="60.0" prefWidth="168.0" text="Customers" />
+            <Button fx:id="BtnadminPanelRentals" layoutX="937.0" layoutY="418.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="168.0" text="Rentals" />
+            <Button fx:id="BtnadminPanelMovies" layoutX="540.0" layoutY="418.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="168.0" text="Movies" />
+            <ImageView fitHeight="212.0" fitWidth="325.0" layoutX="65.0" layoutY="157.0">
                <image>
                   <Image url="@customer.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="220.0" fitWidth="318.0" layoutX="409.0" layoutY="159.0">
+            <ImageView fitHeight="220.0" fitWidth="318.0" layoutX="465.0" layoutY="157.0">
                <image>
                   <Image url="@Movie.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="206.0" fitWidth="235.0" layoutX="803.0" layoutY="173.0">
+            <ImageView fitHeight="206.0" fitWidth="235.0" layoutX="914.0" layoutY="171.0">
                <image>
                   <Image url="@rental.png" />
                </image>
             </ImageView>
-            <Text fx:id="welcomeAdminText" layoutX="36.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Admin" underline="true" wrappingWidth="652.13671875">
+            <Text fx:id="welcomeAdminText" layoutX="64.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" wrappingWidth="652.13671875">
                <font>
-                  <Font size="36.0" />
+                  <Font name="System Bold Italic" size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="CustomerView" layoutX="50.0" layoutY="10.0" prefHeight="608.0" prefWidth="1318.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="adminPanelCustomers_btnAdd" layoutX="32.0" layoutY="505.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="42.0" prefWidth="148.0" text="Add" />
+            <Button fx:id="adminPanelCustomers_btnDelete" layoutX="338.0" layoutY="505.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="141.0" text="Delete" />
+            <Button fx:id="adminPanelCustomers_btnEdit" layoutX="198.0" layoutY="505.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="128.0" text="Edit" />
+            <TextField layoutX="32.0" layoutY="39.0" prefHeight="25.0" prefWidth="180.0" promptText="Search" />
+            <Button layoutX="212.0" layoutY="39.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="68.0" text="Search" />
+            <Button fx:id="BtnBackView" layoutX="856.0" layoutY="505.0" mnemonicParsing="false" onAction="#BackToLastView" prefHeight="42.0" prefWidth="141.0" text="Back" />
+            <TableView fx:id="tableView" layoutX="32.0" layoutY="79.0" prefHeight="410.0" prefWidth="1113.0">
+              <columns>
+                <TableColumn fx:id="IdColumn" prefWidth="47.0" text="Id" />
+                <TableColumn fx:id="firstNameColumn" prefWidth="155.0" text="First Name" />
+                  <TableColumn fx:id="middleNameColumn" prefWidth="187.0" text="Middle Name" />
+                  <TableColumn fx:id="lastNameColumn" prefWidth="151.0" text="Last Name" />
+                  <TableColumn fx:id="adressColumn" minWidth="5.0" prefWidth="152.0" text="Adress" />
+                  <TableColumn fx:id="dateOfBirthColumn" prefWidth="159.0" text="Date of Birth" />
+                  <TableColumn fx:id="usernameColumn" prefWidth="130.0" text="Username" />
+                  <TableColumn fx:id="isAdminColumn" prefWidth="130.0" text="Administrator User" />
+              </columns>
+            </TableView>
+            <Button fx:id="adminPanelCustomers_btnSignOut1" layoutX="1004.0" layoutY="505.0" mnemonicParsing="false" onAction="#signOut" prefHeight="42.0" prefWidth="141.0" text="Sign Out" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AddNewUser" layoutX="10.0" layoutY="10.0" prefHeight="618.0" prefWidth="1328.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="adminPanelCustomers_btnAdd1" layoutX="32.0" layoutY="505.0" mnemonicParsing="false" onAction="#BtnAddNewUser" prefHeight="42.0" prefWidth="148.0" text="Add" />
+            <Button fx:id="BtnBackView1" layoutX="856.0" layoutY="505.0" mnemonicParsing="false" onAction="#BackToLastView" prefHeight="42.0" prefWidth="141.0" text="Back" />
+            <Button fx:id="adminPanelCustomers_btnSignOut11" layoutX="1004.0" layoutY="505.0" mnemonicParsing="false" onAction="#signOut" prefHeight="42.0" prefWidth="141.0" text="Sign Out" />
+            <Text layoutX="32.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add User" underline="true" wrappingWidth="105.943359375">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtFirstName" layoutX="159.0" layoutY="108.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtMiddleName" layoutX="159.0" layoutY="164.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtLasttName" layoutX="159.0" layoutY="225.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtAdress" layoutX="159.0" layoutY="283.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtDateOfBirth" layoutX="722.0" layoutY="108.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtUsername" layoutX="722.0" layoutY="164.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtPassword" layoutX="722.0" layoutY="225.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtIsAdmin" layoutX="722.0" layoutY="283.0" prefHeight="42.0" prefWidth="298.0" />
+            <Text layoutX="43.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" wrappingWidth="105.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="37.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Middle Name:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="37.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="37.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Address:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="565.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth:" wrappingWidth="105.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="565.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="565.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="565.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin User (Y/N):" wrappingWidth="148.0000000000001">
+               <font>
+                  <Font size="18.0" />
                </font>
             </Text>
          </children>

@@ -64,7 +64,7 @@ public class FXMLInitViewController implements Initializable {
     @FXML
     private TextField signUp_username;
     @FXML
-    private TextField signUp_city;
+    private TextField signUp_address;
     @FXML
     private TextField signUp_lastName;
     @FXML
@@ -79,7 +79,7 @@ public class FXMLInitViewController implements Initializable {
     
     public void signInn() throws SQLException, IOException{
         
-        String sqlScript = "SELECT * FROM UsersAdmin WHERE username = ? and password = ?";
+        String sqlScript = "SELECT * FROM client WHERE username = ? and password = ?";
         Alert alert;
         
         connect = database.connectDb();
@@ -149,7 +149,7 @@ public class FXMLInitViewController implements Initializable {
     
     public void signUp() throws SQLException, IOException{
         
-        String sqlScript = "INSERT INTO Client(firstName, middleName, lastName, city, dateOfBirth, username, password) VALUES(?,?,?,?,?,?,?)";
+        String sqlScript = "INSERT INTO client(firstName, middleName, lastName, address, dateOfBirth, username, password, isAdmin) VALUES(?,?,?,?,?,?,?,?)";
         Alert alert;
         
         connect = database.connectDb();
@@ -169,12 +169,13 @@ public class FXMLInitViewController implements Initializable {
         prepare.setString(1, signUp_firstName.getText());
         prepare.setString(2, signUp_middleName.getText());
         prepare.setString(3, signUp_lastName.getText());
-        prepare.setString(4, signUp_city.getText());
+        prepare.setString(4, signUp_address.getText());
         prepare.setString(5, signUp_dateOfBirth.getText());
         prepare.setString(6, signUp_username.getText());
         prepare.setString(7, signUp_password.getText());
+        prepare.setString(8, "N");
         
-        if(signUp_firstName.getText().isEmpty() ||signUp_lastName.getText().isEmpty() || signUp_city.getText().isEmpty() || signUp_dateOfBirth.getText().isEmpty() 
+        if(signUp_firstName.getText().isEmpty() ||signUp_lastName.getText().isEmpty() || signUp_address.getText().isEmpty() || signUp_dateOfBirth.getText().isEmpty() 
                 || signUp_username.getText().isEmpty() || signUp_password.getText().isEmpty())
         {
             alert = new Alert(AlertType.ERROR);
@@ -203,7 +204,7 @@ public class FXMLInitViewController implements Initializable {
                 signUp_firstName.setText("");
                 signUp_lastName.setText("");
                 signUp_middleName.setText("");
-                signUp_city.setText("");
+                signUp_address.setText("");
                 signUp_dateOfBirth.setText("");
                 signUp_username.setText("");
                 signUp_password.setText("");

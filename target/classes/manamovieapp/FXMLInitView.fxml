@@ -16,13 +16,13 @@
          <children>
             <ImageView fitHeight="197.0" fitWidth="348.0" layoutX="255.0" layoutY="66.0">
                <image>
-                  <Image url="@logo-png.png" />
+                  <Image url="@logo.png" />
                </image>
             </ImageView>
             <Button fx:id="signIn_btnLogin" layoutX="353.0" layoutY="466.0" mnemonicParsing="false" onAction="#signInn" prefHeight="56.0" prefWidth="153.0" text="Login" />
             <TextField fx:id="signIn_username" layoutX="304.0" layoutY="323.0" prefHeight="49.0" prefWidth="250.0" promptText="Username" />
             <PasswordField fx:id="signIn_password" layoutX="304.0" layoutY="384.0" prefHeight="49.0" prefWidth="250.0" promptText="Password" />
-            <Hyperlink fx:id="signIn_createAccount" layoutX="353.0" layoutY="554.0" onAction="#switchForm" prefHeight="26.0" prefWidth="144.0" text="Create a new account" underline="true">
+            <Hyperlink fx:id="signIn_createAccount" layoutX="353.0" layoutY="554.0" onAction="#switchForm" prefHeight="26.0" prefWidth="172.0" text="Create a new account" underline="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -31,11 +31,11 @@
       </AnchorPane>
       <AnchorPane fx:id="signUp_form" layoutX="5.0" layoutY="5.0" prefHeight="645.0" prefWidth="858.0" visible="false">
          <children>
-            <Button fx:id="signUp_btnRegister" layoutX="494.0" layoutY="528.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="153.0" text="Register" />
-            <TextField fx:id="signUp_dateOfBirth" layoutX="494.0" layoutY="333.0" prefHeight="49.0" prefWidth="250.0" promptText="Date Of Birth" />
+            <Button fx:id="signUp_btnRegister" layoutX="494.0" layoutY="528.0" mnemonicParsing="false" onAction="#signUp" prefHeight="56.0" prefWidth="153.0" text="Register" />
+            <TextField fx:id="signUp_dateOfBirth" layoutX="494.0" layoutY="333.0" prefHeight="49.0" prefWidth="250.0" promptText="Date Of Birth (yyyy-mm-dd))" />
             <PasswordField fx:id="signUp_password" layoutX="494.0" layoutY="453.0" prefHeight="49.0" prefWidth="250.0" promptText="Password" />
             <TextField fx:id="signUp_username" layoutX="494.0" layoutY="394.0" prefHeight="49.0" prefWidth="250.0" promptText="Username" />
-            <TextField fx:id="signUp_city" layoutX="494.0" layoutY="270.0" prefHeight="49.0" prefWidth="250.0" promptText="City" />
+            <TextField fx:id="signUp_address" layoutX="494.0" layoutY="270.0" prefHeight="49.0" prefWidth="250.0" promptText="Adress" />
             <TextField fx:id="signUp_lastName" layoutX="494.0" layoutY="210.0" prefHeight="49.0" prefWidth="250.0" promptText="Last Name" />
             <TextField fx:id="signUp_middleName" layoutX="494.0" layoutY="150.0" prefHeight="49.0" prefWidth="250.0" promptText="Middle Name" />
             <TextField fx:id="signUp_firstName" layoutX="494.0" layoutY="90.0" prefHeight="49.0" prefWidth="250.0" promptText="First Name" />
@@ -49,7 +49,7 @@
                   <Image url="@userAvatar.jpg" />
                </image>
             </ImageView>
-            <Hyperlink fx:id="signUp_haveAccount" layoutX="494.0" layoutY="605.0" onAction="#switchForm" prefHeight="26.0" prefWidth="189.0" text="Are you ready have account?" underline="true">
+            <Hyperlink fx:id="signUp_haveAccount" layoutX="479.0" layoutY="605.0" onAction="#switchForm" prefHeight="26.0" prefWidth="229.0" text="Are you ready have account?" underline="true">
                <font>
                   <Font size="14.0" />
                </font>
