@@ -42,8 +42,8 @@
       <AnchorPane fx:id="CustomerView" layoutX="50.0" layoutY="10.0" prefHeight="608.0" prefWidth="1318.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button fx:id="adminPanelCustomers_btnAdd" layoutX="32.0" layoutY="505.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="42.0" prefWidth="148.0" text="Add" />
-            <Button fx:id="adminPanelCustomers_btnDelete" layoutX="338.0" layoutY="505.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="141.0" text="Delete" />
-            <Button fx:id="adminPanelCustomers_btnEdit" layoutX="198.0" layoutY="505.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="128.0" text="Edit" />
+            <Button fx:id="adminPanelCustomers_btnDelete" layoutX="338.0" layoutY="505.0" mnemonicParsing="false" onAction="#deleteCustomers" prefHeight="42.0" prefWidth="141.0" text="Delete" />
+            <Button fx:id="adminPanelCustomers_btnEdit" layoutX="198.0" layoutY="505.0" mnemonicParsing="false" onAction="#EditUserView" prefHeight="42.0" prefWidth="128.0" text="Edit" />
             <TextField layoutX="32.0" layoutY="39.0" prefHeight="25.0" prefWidth="180.0" promptText="Search" />
             <Button layoutX="212.0" layoutY="39.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="68.0" text="Search" />
             <Button fx:id="BtnBackView" layoutX="856.0" layoutY="505.0" mnemonicParsing="false" onAction="#BackToLastView" prefHeight="42.0" prefWidth="141.0" text="Back" />
@@ -76,7 +76,7 @@
             <TextField fx:id="txtMiddleName" layoutX="159.0" layoutY="164.0" prefHeight="42.0" prefWidth="298.0" />
             <TextField fx:id="txtLasttName" layoutX="159.0" layoutY="225.0" prefHeight="42.0" prefWidth="298.0" />
             <TextField fx:id="txtAdress" layoutX="159.0" layoutY="283.0" prefHeight="42.0" prefWidth="298.0" />
-            <TextField fx:id="txtDateOfBirth" layoutX="722.0" layoutY="108.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtDateOfBirth" layoutX="722.0" layoutY="108.0" prefHeight="42.0" prefWidth="298.0" promptText="yyyy-mm-dd" />
             <TextField fx:id="txtUsername" layoutX="722.0" layoutY="164.0" prefHeight="42.0" prefWidth="298.0" />
             <TextField fx:id="txtPassword" layoutX="722.0" layoutY="225.0" prefHeight="42.0" prefWidth="298.0" />
             <TextField fx:id="txtIsAdmin" layoutX="722.0" layoutY="283.0" prefHeight="42.0" prefWidth="298.0" />
@@ -100,7 +100,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Text layoutX="565.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth:" wrappingWidth="105.943359375">
+            <Text layoutX="563.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth (yyyy-mm-dd):" wrappingWidth="116.943359375">
                <font>
                   <Font size="18.0" />
                </font>
@@ -116,6 +116,106 @@
                </font>
             </Text>
             <Text layoutX="565.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin User (Y/N):" wrappingWidth="148.0000000000001">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="confirmDeleteUser" prefHeight="608.0" prefWidth="700.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text layoutX="43.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm to delete User" wrappingWidth="570.13671875">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="418.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id:" wrappingWidth="48.259765625">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="418.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" wrappingWidth="141.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="418.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" wrappingWidth="141.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="418.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" wrappingWidth="141.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Button layoutX="418.0" layoutY="526.0" mnemonicParsing="false" onAction="#btnConfirmDeleteUser" prefHeight="48.0" prefWidth="141.0" text="Delete" />
+            <ImageView fitHeight="121.0" fitWidth="128.0" layoutX="495.0" layoutY="91.0">
+               <image>
+                  <Image url="@userAvatar.jpg" />
+               </image>
+            </ImageView>
+            <TextField fx:id="txtIdDelete" editable="false" layoutX="559.0" layoutY="269.0" prefHeight="48.0" prefWidth="206.0" />
+            <TextField fx:id="txtfirstNameDelete" editable="false" layoutX="559.0" layoutY="335.0" prefHeight="48.0" prefWidth="206.0" />
+            <TextField fx:id="txtlastNameDelete" editable="false" layoutX="559.0" layoutY="394.0" prefHeight="48.0" prefWidth="206.0" />
+            <Button layoutX="577.0" layoutY="526.0" mnemonicParsing="false" onAction="#BackToLastView" prefHeight="48.0" prefWidth="141.0" text="Back" />
+            <TextField fx:id="txtaddressDelete" editable="false" layoutX="559.0" layoutY="454.0" prefHeight="48.0" prefWidth="206.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="EditUserView" layoutX="10.0" layoutY="10.0" prefHeight="628.0" prefWidth="1338.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="adminPanelCustomers_btnEditUser" layoutX="32.0" layoutY="505.0" mnemonicParsing="false" onAction="#BtnEditUser" prefHeight="42.0" prefWidth="148.0" text="Submit" />
+            <Button fx:id="BtnBackView" layoutX="856.0" layoutY="505.0" mnemonicParsing="false" onAction="#BackToLastView" prefHeight="42.0" prefWidth="141.0" text="Back" />
+            <Button fx:id="adminPanelCustomers_btnSignOut111" layoutX="1004.0" layoutY="505.0" mnemonicParsing="false" onAction="#signOut" prefHeight="42.0" prefWidth="141.0" text="Sign Out" />
+            <Text layoutX="31.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit User Information:" underline="true" wrappingWidth="297.9999999999999">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtEditUser_firstName" layoutX="153.0" layoutY="183.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtEditUser_middleName" layoutX="153.0" layoutY="239.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtEditUser_lastName" layoutX="153.0" layoutY="300.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtEditUser_address" layoutX="153.0" layoutY="358.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtEditUser_dateOfBirth" layoutX="716.0" layoutY="183.0" prefHeight="42.0" prefWidth="298.0" promptText="yyyy-mm-dd" />
+            <TextField fx:id="txtEditUser_username" layoutX="716.0" layoutY="239.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtEditUser_isAdmin" layoutX="716.0" layoutY="300.0" prefHeight="42.0" prefWidth="298.0" />
+            <Text layoutX="37.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" wrappingWidth="105.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="31.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Middle Name:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="31.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="31.0" layoutY="386.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Address:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="557.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth (yyyy-mm-dd):" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="559.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="559.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin User (Y/N):" wrappingWidth="148.0000000000001">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtEditUser_id" editable="false" layoutX="153.0" layoutY="123.0" prefHeight="42.0" prefWidth="298.0" />
+            <Text layoutX="37.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id:" wrappingWidth="105.943359375">
                <font>
                   <Font size="18.0" />
                </font>
