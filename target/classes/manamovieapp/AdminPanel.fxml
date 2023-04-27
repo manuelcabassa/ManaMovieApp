@@ -10,29 +10,29 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="608.0" prefWidth="1243.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manamovieapp.AdminPanelController">
+<AnchorPane id="AnchorPane" prefHeight="698.0" prefWidth="1727.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manamovieapp.AdminPanelController">
    <children>
       <AnchorPane fx:id="adminPanel" layoutX="77.0" layoutY="95.0" prefHeight="590.0" prefWidth="1135.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="BtnadminPanelCustomers" layoutX="127.0" layoutY="414.0" mnemonicParsing="false" onAction="#customersView" prefHeight="60.0" prefWidth="168.0" text="Customers" />
-            <Button fx:id="BtnadminPanelRentals" layoutX="937.0" layoutY="418.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="168.0" text="Rentals" />
-            <Button fx:id="BtnadminPanelMovies" layoutX="540.0" layoutY="418.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="168.0" text="Movies" />
-            <ImageView fitHeight="212.0" fitWidth="325.0" layoutX="65.0" layoutY="157.0">
+            <Button fx:id="BtnadminPanelCustomers" layoutX="240.0" layoutY="499.0" mnemonicParsing="false" onAction="#customersView" prefHeight="60.0" prefWidth="168.0" text="Customers" />
+            <Button fx:id="BtnadminPanelRentals" layoutX="1353.0" layoutY="499.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="168.0" text="Rentals" />
+            <Button fx:id="BtnadminPanelMovies" layoutX="748.0" layoutY="499.0" mnemonicParsing="false" onAction="#movieAdminPanel" prefHeight="60.0" prefWidth="168.0" text="Movies" />
+            <ImageView fitHeight="277.0" fitWidth="421.0" layoutX="131.0" layoutY="159.0">
                <image>
                   <Image url="@customer.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="220.0" fitWidth="318.0" layoutX="465.0" layoutY="157.0">
+            <ImageView fitHeight="263.0" fitWidth="440.0" layoutX="660.0" layoutY="166.0">
                <image>
                   <Image url="@Movie.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="206.0" fitWidth="235.0" layoutX="914.0" layoutY="171.0">
+            <ImageView fitHeight="263.0" fitWidth="406.0" layoutX="1182.0" layoutY="159.0">
                <image>
                   <Image url="@rental.png" />
                </image>
             </ImageView>
-            <Text fx:id="welcomeAdminText" layoutX="64.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" wrappingWidth="652.13671875">
+            <Text fx:id="welcomeAdminText" layoutX="278.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" wrappingWidth="652.13671875">
                <font>
                   <Font name="System Bold Italic" size="36.0" />
                </font>
@@ -41,25 +41,23 @@
       </AnchorPane>
       <AnchorPane fx:id="CustomerView" layoutX="50.0" layoutY="10.0" prefHeight="608.0" prefWidth="1318.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="adminPanelCustomers_btnAdd" layoutX="32.0" layoutY="505.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="42.0" prefWidth="148.0" text="Add" />
-            <Button fx:id="adminPanelCustomers_btnDelete" layoutX="338.0" layoutY="505.0" mnemonicParsing="false" onAction="#deleteCustomers" prefHeight="42.0" prefWidth="141.0" text="Delete" />
-            <Button fx:id="adminPanelCustomers_btnEdit" layoutX="198.0" layoutY="505.0" mnemonicParsing="false" onAction="#EditUserView" prefHeight="42.0" prefWidth="128.0" text="Edit" />
-            <TextField layoutX="32.0" layoutY="39.0" prefHeight="25.0" prefWidth="180.0" promptText="Search" />
-            <Button layoutX="212.0" layoutY="39.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="68.0" text="Search" />
-            <Button fx:id="BtnBackView" layoutX="856.0" layoutY="505.0" mnemonicParsing="false" onAction="#BackToLastView" prefHeight="42.0" prefWidth="141.0" text="Back" />
-            <TableView fx:id="tableView" layoutX="32.0" layoutY="79.0" prefHeight="410.0" prefWidth="1113.0">
+            <Button fx:id="adminPanelCustomers_btnAdd" layoutX="248.0" layoutY="526.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="42.0" prefWidth="148.0" text="Add" />
+            <Button fx:id="adminPanelCustomers_btnDelete" layoutX="559.0" layoutY="526.0" mnemonicParsing="false" onAction="#deleteCustomers" prefHeight="42.0" prefWidth="141.0" text="Delete" />
+            <Button fx:id="adminPanelCustomers_btnEdit" layoutX="417.0" layoutY="526.0" mnemonicParsing="false" onAction="#EditUserView" prefHeight="42.0" prefWidth="128.0" text="Edit" />
+            <Button fx:id="BtnBackView" layoutX="1206.0" layoutY="526.0" mnemonicParsing="false" onAction="#BackToLastView" prefHeight="42.0" prefWidth="141.0" text="Back" />
+            <TableView fx:id="tableView" layoutX="248.0" layoutY="79.0" prefHeight="418.0" prefWidth="1248.0">
               <columns>
                 <TableColumn fx:id="IdColumn" prefWidth="47.0" text="Id" />
                 <TableColumn fx:id="firstNameColumn" prefWidth="155.0" text="First Name" />
                   <TableColumn fx:id="middleNameColumn" prefWidth="187.0" text="Middle Name" />
-                  <TableColumn fx:id="lastNameColumn" prefWidth="151.0" text="Last Name" />
-                  <TableColumn fx:id="adressColumn" minWidth="5.0" prefWidth="152.0" text="Adress" />
-                  <TableColumn fx:id="dateOfBirthColumn" prefWidth="159.0" text="Date of Birth" />
+                  <TableColumn fx:id="lastNameColumn" prefWidth="185.0" text="Last Name" />
+                  <TableColumn fx:id="adressColumn" minWidth="5.0" prefWidth="158.0" text="Address" />
+                  <TableColumn fx:id="dateOfBirthColumn" prefWidth="119.0" text="Date of Birth" />
                   <TableColumn fx:id="usernameColumn" prefWidth="130.0" text="Username" />
-                  <TableColumn fx:id="isAdminColumn" prefWidth="130.0" text="Administrator User" />
+                  <TableColumn fx:id="isAdminColumn" prefWidth="265.0" text="Administrator User" />
               </columns>
             </TableView>
-            <Button fx:id="adminPanelCustomers_btnSignOut1" layoutX="1004.0" layoutY="505.0" mnemonicParsing="false" onAction="#signOut" prefHeight="42.0" prefWidth="141.0" text="Sign Out" />
+            <Button fx:id="adminPanelCustomers_btnSignOut1" layoutX="1355.0" layoutY="526.0" mnemonicParsing="false" onAction="#signOut" prefHeight="42.0" prefWidth="141.0" text="Sign Out" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="AddNewUser" layoutX="10.0" layoutY="10.0" prefHeight="618.0" prefWidth="1328.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -220,6 +218,30 @@
                   <Font size="18.0" />
                </font>
             </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="movieAdminPanel" layoutX="10.0" layoutY="-10.0" prefHeight="698.0" prefWidth="1727.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="adminPanelMovies_btnAdd" layoutX="32.0" layoutY="505.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="42.0" prefWidth="148.0" text="Add" />
+            <Button fx:id="adminPanelMovies_btnDelete" layoutX="338.0" layoutY="505.0" mnemonicParsing="false" onAction="#deleteCustomers" prefHeight="42.0" prefWidth="141.0" text="Delete" />
+            <Button fx:id="adminPanelMovies_btnEdit" layoutX="198.0" layoutY="505.0" mnemonicParsing="false" onAction="#EditUserView" prefHeight="42.0" prefWidth="128.0" text="Edit" />
+            <Button fx:id="BtnBackView2" layoutX="1375.0" layoutY="505.0" mnemonicParsing="false" onAction="#BackToLastView" prefHeight="42.0" prefWidth="141.0" text="Back" />
+            <TableView fx:id="tableViewMovie" layoutX="32.0" layoutY="79.0" prefHeight="410.0" prefWidth="1632.0">
+               <columns>
+                  <TableColumn fx:id="idMovieColumn" prefWidth="47.0" text="Id" />
+                  <TableColumn fx:id="titleMovieColumn" prefWidth="175.0" text="Title" />
+                  <TableColumn fx:id="directorMovieColumn" prefWidth="168.0" text="Director" />
+                  <TableColumn fx:id="writtersMovieColumn" prefWidth="164.0" text="Writters" />
+                  <TableColumn fx:id="releaseDateMovieColumn" minWidth="5.0" prefWidth="123.0" text="Release Date" />
+                  <TableColumn fx:id="runningTimeMovieColumn" prefWidth="134.0" text="Running Time" />
+                  <TableColumn fx:id="ratedMovieColumn" prefWidth="126.0" text="Rated" />
+                  <TableColumn fx:id="genreMovieColumn" prefWidth="137.0" text="Genre" />
+                  <TableColumn fx:id="castMovieColumn" prefWidth="254.0" text="Cast" />
+                  <TableColumn fx:id="imgPathMovieColumn" prefWidth="166.0" text="Image" />
+                  <TableColumn fx:id="imgPathMovieColumn1" prefWidth="137.0" text="IsRented" />
+               </columns>
+            </TableView>
+            <Button fx:id="adminPanelCustomers_btnSignOut12" layoutX="1523.0" layoutY="505.0" mnemonicParsing="false" onAction="#signOut" prefHeight="42.0" prefWidth="141.0" text="Sign Out" />
          </children>
       </AnchorPane>
    </children>

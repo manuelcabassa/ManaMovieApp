@@ -113,7 +113,8 @@ public class FXMLInitViewController implements Initializable {
         }else{
             
             if(result.next()){
-                alert = new Alert(AlertType.INFORMATION);
+                if("Y".equals(result.getString("isAdmin"))){
+                                    alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("Successfully Login!");
@@ -127,6 +128,19 @@ public class FXMLInitViewController implements Initializable {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+                }
+                else{
+                    
+                signIn_form.getScene().getWindow().hide();
+                Parent root = FXMLLoader.load(getClass().getResource("FXMLUserView.fxml"));
+                
+                
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+                }
+
                 
                 
                 

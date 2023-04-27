@@ -14,11 +14,6 @@
    <children>
       <AnchorPane fx:id="signIn_form" layoutX="176.0" layoutY="123.0" prefHeight="645.0" prefWidth="858.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="197.0" fitWidth="348.0" layoutX="255.0" layoutY="66.0">
-               <image>
-                  <Image url="@logo.png" />
-               </image>
-            </ImageView>
             <Button fx:id="signIn_btnLogin" layoutX="353.0" layoutY="466.0" mnemonicParsing="false" onAction="#signInn" prefHeight="56.0" prefWidth="153.0" text="Login" />
             <TextField fx:id="signIn_username" layoutX="304.0" layoutY="323.0" prefHeight="49.0" prefWidth="250.0" promptText="Username" />
             <PasswordField fx:id="signIn_password" layoutX="304.0" layoutY="384.0" prefHeight="49.0" prefWidth="250.0" promptText="Password" />
@@ -27,6 +22,11 @@
                   <Font size="14.0" />
                </font>
             </Hyperlink>
+            <ImageView fitHeight="200.0" fitWidth="354.0" layoutX="255.0" layoutY="74.0">
+               <image>
+                  <Image url="@logoOF.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="signUp_form" layoutX="5.0" layoutY="5.0" prefHeight="645.0" prefWidth="858.0" visible="false">

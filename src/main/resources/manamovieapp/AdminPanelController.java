@@ -124,6 +124,33 @@ public class AdminPanelController implements Initializable {
     @FXML
     private TextField txtEditUser_isAdmin;
     
+    //Movie panel
+    @FXML
+    private AnchorPane movieAdminPanel;
+    @FXML
+    private TableView<Movies> tableViewMovie;
+    @FXML
+    private TableColumn<Movies, String> idMovieColumn;
+    @FXML
+    private TableColumn<Movies, String> titleMovieColumn;
+    @FXML
+    private TableColumn<Movies, String> directorMovieColumn;
+    @FXML
+    private TableColumn<Movies, String> writtersMovieColumn;
+    @FXML
+    private TableColumn<Movies, LocalDate> releaseDateMovieColumn;
+    @FXML
+    private TableColumn<Movies, String> runningTimeMovieColumn;
+    @FXML
+    private TableColumn<Movies, String> ratedMovieColumn;
+    @FXML
+    private TableColumn<Movies, String> genreMovieColumn;
+    @FXML
+    private TableColumn<Movies, String> castMovieColumn;
+    @FXML
+    private TableColumn<Movies, String> imgPathMovieColumn;
+    
+    
    
     
     
@@ -136,6 +163,7 @@ public class AdminPanelController implements Initializable {
     private ResultSet result;
     Alert alert;
 
+    //Customers admin panel
     public void customersView() throws SQLException {
         adminPanel.setVisible(false);
         CustomerView.setVisible(true);
@@ -426,6 +454,36 @@ public class AdminPanelController implements Initializable {
         //txtfirstNameDelete.setText(customer.getFirstName());
 
     }
+    
+    
+    
+    //Movie admin panel
+    
+    public void movieAdminPanel(){
+        
+        adminPanel.setVisible(false);
+        movieAdminPanel.setVisible(true);
+        
+        idMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("Id"));
+        titleMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("title"));
+        directorMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("director"));
+        writtersMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("writters"));
+        releaseDateMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, LocalDate>("releaseDate"));
+        runningTimeMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("runningTime"));
+        ratedMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("rated"));
+        genreMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("genre"));
+        castMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("cast"));
+        imgPathMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("imgPath"));
+
+        try {
+            tableViewMovie.setItems(getMovies());
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminPanelController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
 
     public void signOut() throws IOException {
 
@@ -512,6 +570,68 @@ public class AdminPanelController implements Initializable {
 
                 }
                 return customer;
+            } else {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Error populating the table, try later");
+                alert.showAndWait();
+
+            }
+
+            //customer.add(new Customers(1, "test", "test", "test", "san juan", LocalDate.of(1993, 02, 23), "mcabassa", "Y"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connect.close();
+        }
+        return null;
+
+    }
+       public ObservableList<Movies> getMovies() throws SQLException {
+
+        String sqlScript = "SELECT * FROM movie";
+
+        connect = database.connectDb();
+
+        if (connect == null) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Error connection with database");
+            alert.showAndWait();
+        }
+        try {
+            statement = connect.createStatement();
+            ResultSet rs = statement.executeQuery(sqlScript);
+
+            if (rs != null) {
+                ObservableList<Movies> movie = FXCollections.observableArrayList();
+                while (rs.next()) {
+                    /*String Id = rs.getNString(1);
+                String firstName = rs.getString("firstName");
+                String middleName = rs.getString("middleName");
+                String lastName = rs.getString("lastName");
+                String city = rs.getString("city");
+                Date dateOfBirth = rs.getDate("dateOfBirth");
+                String username = rs.getString("username");
+                String isAdmin = rs.getString("isAdmin");*/
+                    Integer Id = rs.getInt(1);
+                    String title = rs.getNString(2);
+                    String director = rs.getNString(3);
+                    String writters = rs.getNString(4);
+                    Date releaseDate = rs.getDate(5);
+                    String runningTime = rs.getNString(6);
+                    String rated = rs.getNString(7);
+                    String genre = rs.getNString(8);
+                    String cast = rs.getNString(9);
+                    String imgPath = rs.getNString(10);
+
+                    Movies movies = new Movies(Id.toString(), title, director, writters, releaseDate.toLocalDate(), runningTime, rated, genre, cast, imgPath);
+                    movie.add(movies);
+
+                }
+                return movie;
             } else {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
