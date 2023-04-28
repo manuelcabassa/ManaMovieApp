@@ -1,6 +1,7 @@
 package manamovieapp;
 
 import com.mysql.cj.protocol.Resultset;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -20,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -28,10 +30,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -91,9 +99,8 @@ public class AdminPanelController implements Initializable {
     private TextField txtPassword;
     @FXML
     private TextField txtIsAdmin;
-    
-    //Delete form fields
 
+    //Delete form fields
     @FXML
     private TextField txtIdDelete;
     @FXML
@@ -102,9 +109,8 @@ public class AdminPanelController implements Initializable {
     private TextField txtlastNameDelete;
     @FXML
     private TextField txtaddressDelete;
-    
+
     //Edit form fields
-    
     @FXML
     private AnchorPane EditUserView;
     @FXML
@@ -123,10 +129,16 @@ public class AdminPanelController implements Initializable {
     private TextField txtEditUser_username;
     @FXML
     private TextField txtEditUser_isAdmin;
-    
+
     //Movie panel
     @FXML
+    private ImageView imageSelectViewContainer;
+    @FXML
+    private Button UploadImg;
+    @FXML
     private AnchorPane movieAdminPanel;
+    @FXML
+    private AnchorPane addMovie;
     @FXML
     private TableView<Movies> tableViewMovie;
     @FXML
@@ -149,19 +161,76 @@ public class AdminPanelController implements Initializable {
     private TableColumn<Movies, String> castMovieColumn;
     @FXML
     private TableColumn<Movies, String> imgPathMovieColumn;
+    @FXML
+    private TableColumn<Movies, String> isRentedMovieColumn;
+    @FXML
+    private TextField txtAddMovieId;
+    @FXML
+    private TextField txtAddMovieTitle;
+    @FXML
+    private TextField txtAddMovieDirector;
+    @FXML
+    private TextField txtAddMovieWritters;
+    @FXML
+    private TextField txtAddMovieReleaseDate;
+    @FXML
+    private TextField txtAddMovieRunningTime;
+    @FXML
+    private TextField txtAddMovieRated;
+    @FXML
+    private TextField txtAddMovieGenre;
+    @FXML
+    private TextArea txtAddMovieCast;
+    @FXML
+    private ImageView imageview;
     
+    @FXML
+    private ImageView imageview1;
     
-   
-    
-    
-    
-    //Sql parameters
+    @FXML
+    private TextField txtEditMovieImage;
+    @FXML
+    private TextField txtEditisRented;
 
+    @FXML
+    private AnchorPane editMoviePanel;
+    
+    @FXML
+    private TextField txtEditMovieDirector;
+
+    @FXML
+    private TextField txtEditMovieGenre;
+
+    @FXML
+    private TextField txtEditMovieRated;
+
+    @FXML
+    private TextField txtEditMovieReleaseDate;
+
+    @FXML
+    private TextField txtEditMovieRunningTime;
+
+    @FXML
+    private TextField txtEditMovieTitle;
+
+    @FXML
+    private TextField txtEditMovieWritters;
+    @FXML
+    private TextArea txtEditMovieCast;
+    
+    @FXML
+    private TextField txtEditMovieId;
+    
+    private Image image;
+    public String uri;
+
+    //Sql parameters
     private Connection connect;
     private PreparedStatement prepare;
     private Statement statement;
     private ResultSet result;
     Alert alert;
+
 
     //Customers admin panel
     public void customersView() throws SQLException {
@@ -272,10 +341,9 @@ public class AdminPanelController implements Initializable {
         }
 
     }
-    
-    public void EditUserView()
-    {
-        
+
+    public void EditUserView() {
+
         Customers customer = tableView.getSelectionModel().getSelectedItem();
         int index = tableView.getSelectionModel().getSelectedIndex();
 
@@ -289,28 +357,26 @@ public class AdminPanelController implements Initializable {
             alert.showAndWait();
             return;
         } else {
-        CustomerView.setVisible(false);
-        EditUserView.setVisible(true);
-        txtEditUser_id.setText(customer.getId());
-        txtEditUser_firstName.setText(customer.getFirstName());
-        txtEditUser_middleName.setText(customer.getMiddleName());
-        txtEditUser_lastName.setText(customer.getLastName()); 
-        txtEditUser_address.setText(customer.getAdress());
-        txtEditUser_username.setText(customer.getUsername()); 
-        txtEditUser_dateOfBirth.setText(customer.getDateOfBirth().toString());
-        txtEditUser_isAdmin.setText(customer.getIsAdmin()); 
+            CustomerView.setVisible(false);
+            EditUserView.setVisible(true);
+            txtEditUser_id.setText(customer.getId());
+            txtEditUser_firstName.setText(customer.getFirstName());
+            txtEditUser_middleName.setText(customer.getMiddleName());
+            txtEditUser_lastName.setText(customer.getLastName());
+            txtEditUser_address.setText(customer.getAdress());
+            txtEditUser_username.setText(customer.getUsername());
+            txtEditUser_dateOfBirth.setText(customer.getDateOfBirth().toString());
+            txtEditUser_isAdmin.setText(customer.getIsAdmin());
         }
-        
-        
-       
+
     }
-    
-    public void BtnEditUser() throws SQLException{
-        
+
+    public void BtnEditUser() throws SQLException {
+
         Customers customer = tableView.getSelectionModel().getSelectedItem();
         int index = tableView.getSelectionModel().getSelectedIndex();
-        String sqlScript = "UPDATE client SET firstName = ?, middleName = ?, lastname = ?, address = ?, dateOfBirth = ?, username = ?, isAdmin = ?\n" +
-" WHERE idClient = ?";
+        String sqlScript = "UPDATE client SET firstName = ?, middleName = ?, lastname = ?, address = ?, dateOfBirth = ?, username = ?, isAdmin = ?\n"
+                + " WHERE idClient = ?";
 
         connect = database.connectDb();
 
@@ -321,17 +387,16 @@ public class AdminPanelController implements Initializable {
             alert.setContentText("Error connection with database");
             alert.showAndWait();
         }
-        
-        try{
-            
-            
-            if(txtEditUser_id.getText().isEmpty()){
+
+        try {
+
+            if (txtEditUser_id.getText().isEmpty()) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
                 alert.setContentText("The id fields is empty or not found.");
                 alert.showAndWait();
-            }else{
+            } else {
                 prepare = connect.prepareStatement(sqlScript);
                 prepare.setString(1, txtEditUser_firstName.getText());
                 prepare.setString(2, txtEditUser_middleName.getText());
@@ -347,26 +412,23 @@ public class AdminPanelController implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("The record has succefully updated.");
                 alert.showAndWait();
-                
+
                 try {
                     tableView.setItems(getCustomers());
                 } catch (SQLException ex) {
                     Logger.getLogger(AdminPanelController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 CustomerView.setVisible(true);
                 EditUserView.setVisible(false);
             }
-            
-            
-            
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             connect.close();
         }
-        
+
     }
 
     public void deleteCustomers() throws SQLException {
@@ -384,14 +446,13 @@ public class AdminPanelController implements Initializable {
             alert.showAndWait();
             return;
         } else {
-         CustomerView.setVisible(false);
-        confirmDeleteUser.setVisible(true);
-        txtIdDelete.setText(customer.getId());
-        txtfirstNameDelete.setText(customer.getFirstName());
-        txtlastNameDelete.setText(customer.getLastName());
-        txtaddressDelete.setText(customer.getAdress());
-        
-           
+            CustomerView.setVisible(false);
+            confirmDeleteUser.setVisible(true);
+            txtIdDelete.setText(customer.getId());
+            txtfirstNameDelete.setText(customer.getFirstName());
+            txtlastNameDelete.setText(customer.getLastName());
+            txtaddressDelete.setText(customer.getAdress());
+
         }
 
     }
@@ -411,59 +472,51 @@ public class AdminPanelController implements Initializable {
             alert.setContentText("Error connection with database");
             alert.showAndWait();
         }
-        
-        try{
-            
+
+        try {
+
             prepare = connect.prepareStatement(sqlScript);
             prepare.setString(1, txtIdDelete.getText());
-            
-            if(txtIdDelete.getText().isEmpty()){
+
+            if (txtIdDelete.getText().isEmpty()) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
                 alert.setContentText("The id fields is empty.");
                 alert.showAndWait();
-            }else{
+            } else {
                 prepare.execute();
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("The record has succefully delete.");
                 alert.showAndWait();
-                
+
                 try {
                     tableView.setItems(getCustomers());
                 } catch (SQLException ex) {
                     Logger.getLogger(AdminPanelController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 CustomerView.setVisible(true);
                 confirmDeleteUser.setVisible(false);
             }
-            
-            
-            
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             connect.close();
         }
 
-
         //txtfirstNameDelete.setText(customer.getFirstName());
-
     }
-    
-    
-    
+
     //Movie admin panel
-    
-    public void movieAdminPanel(){
-        
+    public void movieAdminPanel() {
+
         adminPanel.setVisible(false);
         movieAdminPanel.setVisible(true);
-        
+
         idMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("Id"));
         titleMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("title"));
         directorMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("director"));
@@ -474,16 +527,266 @@ public class AdminPanelController implements Initializable {
         genreMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("genre"));
         castMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("cast"));
         imgPathMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("imgPath"));
+        isRentedMovieColumn.setCellValueFactory(new PropertyValueFactory<Movies, String>("isRented"));
 
         try {
             tableViewMovie.setItems(getMovies());
         } catch (SQLException ex) {
             Logger.getLogger(AdminPanelController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    }
+
+    public void addMoviePanel() throws SQLException {
+        movieAdminPanel.setVisible(false);
+        addMovie.setVisible(true);
+
+    }
+
+    public void UploadImg() {
+        FileChooser open = new FileChooser();
+        open.setTitle("Open Image");
+        open.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image File", "*png", "*jpg"));
+
+        Stage stage = (Stage) addMovie.getScene().getWindow();
+        File file = open.showOpenDialog(stage);
+
+        if (file != null) {
+            image = new Image(file.toURI().toString(), 300, 300, false, true);
+
+            imageview.setImage(image);
+            getData.path = file.getAbsolutePath();
+        }
+
+    }
+        public void UploadEditImg() {
+        FileChooser open = new FileChooser();
+        open.setTitle("Open Image");
+        open.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image File", "*png", "*jpg"));
+
+        Stage stage = (Stage) editMoviePanel.getScene().getWindow();
+        File file = open.showOpenDialog(stage);
+
+        if (file != null) {
+            image = new Image(file.toURI().toString(), 300, 300, false, true);
+
+            imageview1.setImage(image);
+            getData.path = file.getAbsolutePath();
+        }
+
+    }
+
+    public void BtnAddMovie() throws SQLException {
+
+        String sqlScript = "INSERT INTO movie(title, director, writters, releaseDate, runningTime, rated, cast, genre, ImgPath, isRented) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        //String sqlScript2 = "SELECT title FROM movie";
+
+        connect = database.connectDb();
+
+        if (connect == null) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Error connection with database");
+            alert.showAndWait();
+        }
+
+        try {
+            String isRented = "N";
+            uri = getData.path;
+            uri = uri.replace("\\", "\\\\");
+
+            prepare = connect.prepareStatement(sqlScript);
+            prepare.setString(1, txtAddMovieTitle.getText());
+            prepare.setString(2, txtAddMovieDirector.getText());
+            prepare.setString(3, txtAddMovieWritters.getText());
+            prepare.setString(4, txtAddMovieReleaseDate.getText());
+            prepare.setString(5, txtAddMovieRunningTime.getText());
+            prepare.setString(6, txtAddMovieRated.getText().toUpperCase());
+            prepare.setString(7, txtAddMovieGenre.getText());
+            prepare.setString(8, txtAddMovieCast.getText());
+            prepare.setString(9, uri);
+            prepare.setString(10, isRented);
+
+            if (txtAddMovieTitle.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please fill the fields.");
+                alert.showAndWait();
+
+            } else {
+                prepare.execute();
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Successfully Register the new movie!");
+                alert.showAndWait();
+
+                //Clean input text
+                /*txtAddMovieTitle.setText("");
+                txtAddMovieDirector.setText("");
+                txtAddMovieWritters.setText("");
+                txtAddMovieReleaseDate.setText("");
+                txtAddMovieRunningTime.setText("");
+                txtAddMovieRated.setText("");
+                txtAddMovieGenre.setText("");
+                txtAddMovieCast.setText("");*/
+                //txtAddMovieImage.set
+
+                try {
+                    tableViewMovie.setItems(getMovies());
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdminPanelController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                addMovie.setVisible(false);
+                movieAdminPanel.setVisible(true);
+
+                //Parent root = FXMLLoader.load(getClass().getResource("FXMLInitView.fxml"));
+                //Stage stage = new Stage();
+                //Scene scene = new Scene(root);
+                //stage.setScene(scene);
+                //stage.show();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connect.close();
+        }
+
+    }
+
+    public void editMovie() {
+        movieAdminPanel.setVisible(false);
+        editMoviePanel.setVisible(true);
         
+       
+
+        Movies movie = tableViewMovie.getSelectionModel().getSelectedItem();
+        int index = tableViewMovie.getSelectionModel().getSelectedIndex();
+         
+
+        if ((index - 1) < -1) {
+            editMoviePanel.setVisible(false);
+            movieAdminPanel.setVisible(true);
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("First select the row you want to edit.");
+            alert.showAndWait();
+            return;
+        } else {
+
+            movieAdminPanel.setVisible(false);
+            editMoviePanel.setVisible(true);
+            
+            txtEditMovieId.setText(movie.getId());
+            txtEditMovieTitle.setText(movie.getTitle());
+            txtEditMovieDirector.setText(movie.getDirector());
+            txtEditMovieWritters.setText(movie.getWritters());
+            txtEditMovieReleaseDate.setText(movie.getReleaseDate().toString());
+            txtEditMovieRunningTime.setText(movie.getRunningTime());
+            txtEditMovieRated.setText(movie.getRated());
+            txtEditMovieGenre.setText(movie.getGenre());
+            txtEditMovieCast.setText(movie.getCast());
+            txtEditMovieImage.setText(movie.getImgPath());
+            txtEditisRented.setText(movie.getIsRented());
+            uri = movie.getImgPath();
+            
+        }
+
+    }
+
+    public void btnEditMovie() throws SQLException {
+         uri = getData.path;
+        uri = uri.replace("\\", "\\\\");
+
+        String sqlScript = "UPDATE movie SET title = ?, director = ?, writters = ?, releaseDate = ?, runningTime = ?, rated = ?, genre = ?, cast = ?, ImgPath = ?, isRented = ? WHERE idMovie = ? ";
+
+        connect = database.connectDb();
+
+        if (connect == null) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Error connection with database");
+            alert.showAndWait();
+        }
+
+        try {
+
+            if (txtEditMovieId.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("The id fields is empty or not found.");
+                alert.showAndWait();
+            } else {
+            
+
+            prepare = connect.prepareStatement(sqlScript);
+
+            
+            prepare.setString(1, txtEditMovieTitle.getText());
+            prepare.setString(2, txtEditMovieDirector.getText());
+            prepare.setString(3, txtEditMovieWritters.getText());
+            prepare.setString(4, txtEditMovieReleaseDate.getText());
+            prepare.setString(5, txtEditMovieRunningTime.getText());
+            prepare.setString(6, txtEditMovieRated.getText().toUpperCase());
+            prepare.setString(7, txtEditMovieGenre.getText());
+            prepare.setString(8, txtEditMovieCast.getText());
+            prepare.setString(9, uri);
+            prepare.setString(10, txtEditisRented.getText());
+            prepare.setString(11, txtEditMovieId.getText());
+                
+                
+                prepare.execute();
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("The record has succefully updated.");
+                alert.showAndWait();
+                
+                
+
+                try {
+                    tableViewMovie.setItems(getMovies());
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdminPanelController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                movieAdminPanel.setVisible(true);
+                editMoviePanel.setVisible(false);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connect.close();
+            txtEditMovieId.setText("");
+            txtEditMovieTitle.setText("");
+            txtEditMovieDirector.setText("");
+            txtEditMovieWritters.setText("");
+            txtEditMovieReleaseDate.setText("");
+            txtEditMovieRunningTime.setText("");
+            txtEditMovieRated.setText("");
+            txtEditMovieGenre.setText("");
+            txtEditMovieCast.setText("");
+            txtEditMovieImage.setText("");
+            txtEditisRented.setText("");
+        }
+
+    }
+
+    public void deleteMovie() {
+
     }
     
-    
+    public void BtnDeleteMovie(){
+        
+    }
 
     public void signOut() throws IOException {
 
@@ -496,28 +799,8 @@ public class AdminPanelController implements Initializable {
         stage.show();
     }
 
-    public void BackToLastView() {
+    public void BackToLastView() throws IOException {
 
-        if (CustomerView.getScene().getWindow().isShowing()) {
-            
-            
-            CustomerView.setVisible(false);
-            adminPanel.setVisible(true);
-            
-        } 
-        
-        if (confirmDeleteUser != null) {
-            //confirmDeleteUser.getScene().getWindow().hide();
-            adminPanel.setVisible(false);
-            CustomerView.setVisible(true);
-            confirmDeleteUser.setVisible(false);
-        }
-        if (EditUserView != null) {
-            //confirmDeleteUser.getScene().getWindow().hide();
-            adminPanel.setVisible(false);
-            CustomerView.setVisible(true);
-            EditUserView.setVisible(false);
-        }
     }
 
     @Override
@@ -588,7 +871,8 @@ public class AdminPanelController implements Initializable {
         return null;
 
     }
-       public ObservableList<Movies> getMovies() throws SQLException {
+
+    public ObservableList<Movies> getMovies() throws SQLException {
 
         String sqlScript = "SELECT * FROM movie";
 
@@ -608,14 +892,6 @@ public class AdminPanelController implements Initializable {
             if (rs != null) {
                 ObservableList<Movies> movie = FXCollections.observableArrayList();
                 while (rs.next()) {
-                    /*String Id = rs.getNString(1);
-                String firstName = rs.getString("firstName");
-                String middleName = rs.getString("middleName");
-                String lastName = rs.getString("lastName");
-                String city = rs.getString("city");
-                Date dateOfBirth = rs.getDate("dateOfBirth");
-                String username = rs.getString("username");
-                String isAdmin = rs.getString("isAdmin");*/
                     Integer Id = rs.getInt(1);
                     String title = rs.getNString(2);
                     String director = rs.getNString(3);
@@ -626,8 +902,9 @@ public class AdminPanelController implements Initializable {
                     String genre = rs.getNString(8);
                     String cast = rs.getNString(9);
                     String imgPath = rs.getNString(10);
+                    String isRented = rs.getNString(11);
 
-                    Movies movies = new Movies(Id.toString(), title, director, writters, releaseDate.toLocalDate(), runningTime, rated, genre, cast, imgPath);
+                    Movies movies = new Movies(Id.toString(), title, director, writters, releaseDate.toLocalDate(), runningTime, rated, genre, cast, imgPath, isRented);
                     movie.add(movies);
 
                 }

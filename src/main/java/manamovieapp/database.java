@@ -17,9 +17,9 @@ public class database {
     public static Connection connectDb(){
         try{
             
-        String url = "jdbc:mysql://localhost:3306/manamovie";
-        //Class.forName ("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection (url, "usuario", "password");
+        String url = "jdbc:mysql://localhost:3306/movieapp";
+        Class.forName ("com.mysql.jdbc.Driver");
+        Connection conn = DriverManager.getConnection (url, "root", "admin12345");
             
         return conn;
             

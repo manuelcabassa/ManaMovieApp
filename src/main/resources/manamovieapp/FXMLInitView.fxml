@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="645.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manamovieapp.FXMLInitViewController">
+<AnchorPane id="AnchorPane" prefHeight="645.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manamovieapp.FXMLInitViewController">
    <children>
       <AnchorPane fx:id="signIn_form" layoutX="176.0" layoutY="123.0" prefHeight="645.0" prefWidth="858.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -24,7 +24,7 @@
             </Hyperlink>
             <ImageView fitHeight="200.0" fitWidth="354.0" layoutX="255.0" layoutY="74.0">
                <image>
-                  <Image url="@logoOF.png" />
+                  <Image url="@logo.png" />
                </image>
             </ImageView>
          </children>

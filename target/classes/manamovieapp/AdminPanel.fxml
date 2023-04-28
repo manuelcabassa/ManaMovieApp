@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -222,9 +223,9 @@
       </AnchorPane>
       <AnchorPane fx:id="movieAdminPanel" layoutX="10.0" layoutY="-10.0" prefHeight="698.0" prefWidth="1727.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="adminPanelMovies_btnAdd" layoutX="32.0" layoutY="505.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="42.0" prefWidth="148.0" text="Add" />
-            <Button fx:id="adminPanelMovies_btnDelete" layoutX="338.0" layoutY="505.0" mnemonicParsing="false" onAction="#deleteCustomers" prefHeight="42.0" prefWidth="141.0" text="Delete" />
-            <Button fx:id="adminPanelMovies_btnEdit" layoutX="198.0" layoutY="505.0" mnemonicParsing="false" onAction="#EditUserView" prefHeight="42.0" prefWidth="128.0" text="Edit" />
+            <Button fx:id="adminPanelMovies_btnAdd" layoutX="32.0" layoutY="505.0" mnemonicParsing="false" onAction="#addMoviePanel" prefHeight="42.0" prefWidth="148.0" text="Add" />
+            <Button fx:id="adminPanelMovies_btnDelete" layoutX="338.0" layoutY="505.0" mnemonicParsing="false" onAction="#deleteMovie" prefHeight="42.0" prefWidth="141.0" text="Delete" />
+            <Button fx:id="adminPanelMovies_btnEdit" layoutX="198.0" layoutY="505.0" mnemonicParsing="false" onAction="#editMovie" prefHeight="42.0" prefWidth="128.0" text="Edit" />
             <Button fx:id="BtnBackView2" layoutX="1375.0" layoutY="505.0" mnemonicParsing="false" onAction="#BackToLastView" prefHeight="42.0" prefWidth="141.0" text="Back" />
             <TableView fx:id="tableViewMovie" layoutX="32.0" layoutY="79.0" prefHeight="410.0" prefWidth="1632.0">
                <columns>
@@ -238,10 +239,195 @@
                   <TableColumn fx:id="genreMovieColumn" prefWidth="137.0" text="Genre" />
                   <TableColumn fx:id="castMovieColumn" prefWidth="254.0" text="Cast" />
                   <TableColumn fx:id="imgPathMovieColumn" prefWidth="166.0" text="Image" />
-                  <TableColumn fx:id="imgPathMovieColumn1" prefWidth="137.0" text="IsRented" />
+                  <TableColumn fx:id="isRentedMovieColumn" prefWidth="137.0" text="IsRented" />
                </columns>
             </TableView>
             <Button fx:id="adminPanelCustomers_btnSignOut12" layoutX="1523.0" layoutY="505.0" mnemonicParsing="false" onAction="#signOut" prefHeight="42.0" prefWidth="141.0" text="Sign Out" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="addMovie" layoutX="10.0" layoutY="10.0" prefHeight="698.0" prefWidth="1727.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="adminPanelMovie_btnAdd" layoutX="28.0" layoutY="612.0" mnemonicParsing="false" onAction="#BtnAddMovie" prefHeight="42.0" prefWidth="148.0" text="Add" />
+            <Button fx:id="BtnBackView11" layoutX="1376.0" layoutY="612.0" mnemonicParsing="false" onAction="#BackToLastView" prefHeight="42.0" prefWidth="141.0" text="Back" />
+            <Button fx:id="adminPanelCustomers_btnSignOut112" layoutX="1524.0" layoutY="612.0" mnemonicParsing="false" onAction="#signOut" prefHeight="42.0" prefWidth="141.0" text="Sign Out" />
+            <Text layoutX="37.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Movie" underline="true" wrappingWidth="156.943359375">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtAddMovieTitle" layoutX="723.0" layoutY="102.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtAddMovieDirector" layoutX="723.0" layoutY="158.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtAddMovieWritters" layoutX="723.0" layoutY="219.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtAddMovieReleaseDate" layoutX="723.0" layoutY="285.0" prefHeight="42.0" prefWidth="298.0" promptText="yyyy-mm-dd" />
+            <TextField fx:id="txtAddMovieRunningTime" layoutX="1222.0" layoutY="99.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtAddMovieRated" layoutX="1222.0" layoutY="160.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtAddMovieGenre" layoutX="1222.0" layoutY="218.0" prefHeight="42.0" prefWidth="298.0" />
+            <Text layoutX="607.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="105.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="601.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Director" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="601.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Writters" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="601.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Release Date (yyyy-mm-dd):" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="1065.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Running Time:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="1065.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rated:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="1065.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:" wrappingWidth="148.0000000000001">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="1065.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cast:" wrappingWidth="148.0000000000001">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="txtAddMovieCast" layoutX="1222.0" layoutY="268.0" prefHeight="194.0" prefWidth="298.0" />
+            <ImageView fx:id="imageview" fitHeight="269.0" fitWidth="298.0" focusTraversable="true" layoutX="137.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@select-Image.png" />
+               </image></ImageView>
+            <Button fx:id="btnUploadImage" layoutX="167.0" layoutY="462.0" mnemonicParsing="false" onAction="#UploadImg" prefHeight="48.0" prefWidth="177.0" text="Upload" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="editMoviePanel" layoutX="10.0" layoutY="10.0" prefHeight="708.0" prefWidth="1737.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="adminPanelMovie_btnAdd1" layoutX="28.0" layoutY="612.0" mnemonicParsing="false" onAction="#btnEditMovie" prefHeight="42.0" prefWidth="148.0" text="Submit" />
+            <Button fx:id="BtnBackView111" layoutX="1376.0" layoutY="612.0" mnemonicParsing="false" onAction="#BackToLastView" prefHeight="42.0" prefWidth="141.0" text="Back" />
+            <Button fx:id="adminPanelCustomers_btnSignOut1121" layoutX="1524.0" layoutY="612.0" mnemonicParsing="false" onAction="#signOut" prefHeight="42.0" prefWidth="141.0" text="Sign Out" />
+            <Text layoutX="37.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Movie" underline="true" wrappingWidth="156.943359375">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtEditMovieTitle" layoutX="724.0" layoutY="160.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtEditMovieDirector" layoutX="724.0" layoutY="216.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtEditMovieWritters" layoutX="724.0" layoutY="277.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtEditMovieReleaseDate" layoutX="724.0" layoutY="343.0" prefHeight="42.0" prefWidth="298.0" promptText="yyyy-mm-dd" />
+            <TextField fx:id="txtEditMovieRunningTime" layoutX="1222.0" layoutY="99.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtEditMovieRated" layoutX="1222.0" layoutY="160.0" prefHeight="42.0" prefWidth="298.0" />
+            <TextField fx:id="txtEditMovieGenre" layoutX="1222.0" layoutY="218.0" prefHeight="42.0" prefWidth="298.0" />
+            <Text layoutX="608.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" wrappingWidth="105.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="602.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Director:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="602.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Writters:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="602.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Release Date (yyyy-mm-dd):" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="1065.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Running Time:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="1065.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rated:" wrappingWidth="116.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="1065.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:" wrappingWidth="148.0000000000001">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="1065.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cast:" wrappingWidth="148.0000000000001">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="txtEditMovieCast" layoutX="1222.0" layoutY="268.0" prefHeight="194.0" prefWidth="298.0" />
+            <ImageView fx:id="imageview1" fitHeight="269.0" fitWidth="298.0" focusTraversable="true" layoutX="137.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="btnUploadImage1" layoutX="167.0" layoutY="462.0" mnemonicParsing="false" onAction="#UploadEditImg" prefHeight="48.0" prefWidth="177.0" text="Upload" />
+            <TextField fx:id="txtEditMovieId" editable="false" layoutX="724.0" layoutY="99.0" prefHeight="42.0" prefWidth="298.0" />
+            <Text layoutX="608.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id:" wrappingWidth="105.943359375">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtEditisRented" layoutX="730.0" layoutY="406.0" prefHeight="42.0" prefWidth="298.0" />
+            <Text layoutX="596.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="isRented (Y/N):" wrappingWidth="127.99999999999989">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtEditMovieImage" layoutX="730.0" layoutY="465.0" prefHeight="42.0" prefWidth="298.0" />
+            <Text layoutX="602.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PATH:" wrappingWidth="127.99999999999989">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="deleteMovie" layoutX="10.0" layoutY="10.0" prefHeight="698.0" prefWidth="1727.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text layoutX="43.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm to delete Movie" wrappingWidth="570.13671875">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="418.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id:" wrappingWidth="48.259765625">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="418.0" layoutY="392.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" wrappingWidth="141.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="870.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Running Time:" wrappingWidth="168.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="877.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Release Date:" wrappingWidth="168.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Button layoutX="720.0" layoutY="566.0" mnemonicParsing="false" onAction="#BtnDeleteMovie" prefHeight="48.0" prefWidth="141.0" text="Delete" />
+            <ImageView fitHeight="194.0" fitWidth="206.0" layoutX="748.0" layoutY="52.0">
+               <image>
+                  <Image url="@rental.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="txtDeleteMovieId" editable="false" layoutX="559.0" layoutY="304.0" prefHeight="48.0" prefWidth="206.0" />
+            <TextField fx:id="txtDeleteMovieTitle" editable="false" layoutX="559.0" layoutY="359.0" prefHeight="48.0" prefWidth="206.0" />
+            <TextField fx:id="txtDeleteMovieRunningTime" editable="false" layoutX="1058.0" layoutY="304.0" prefHeight="48.0" prefWidth="206.0" />
+            <Button layoutX="879.0" layoutY="566.0" mnemonicParsing="false" onAction="#BackToLastView" prefHeight="48.0" prefWidth="141.0" text="Back" />
+            <TextField fx:id="txtDeleteMovieReleaseDate" editable="false" layoutX="1058.0" layoutY="359.0" prefHeight="48.0" prefWidth="206.0" />
          </children>
       </AnchorPane>
    </children>
