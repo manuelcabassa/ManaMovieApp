@@ -619,7 +619,7 @@ public class AdminPanelController implements Initializable {
         try {
             String isRented = "N";
             uri = getData.path;
-            uri = uri.replace("\\", "\\\\");
+            //uri = uri.replace("\\", "\\\\");
 
             prepare = connect.prepareStatement(sqlScript);
             prepare.setString(1, txtAddMovieTitle.getText());

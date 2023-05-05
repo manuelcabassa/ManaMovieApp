@@ -22,7 +22,7 @@ public class Movies {
     private SimpleStringProperty rated;
     private SimpleStringProperty genre;
     private SimpleStringProperty cast;
-    private SimpleStringProperty imgPath;
+    private String imgPath;
     private SimpleStringProperty isRented;
     
     public Movies(){
@@ -39,7 +39,8 @@ public class Movies {
         this.rated = new SimpleStringProperty(rated);
         this.genre = new SimpleStringProperty(genre);
         this.cast = new SimpleStringProperty(cast);
-        this.imgPath = new SimpleStringProperty(imgPath);
+        //this.imgPath = new SimpleStringProperty(imgPath);
+        this.imgPath = imgPath;
         this.isRented = new SimpleStringProperty(isrented);
     }
 
@@ -117,10 +118,10 @@ public class Movies {
     }
 
     public String getImgPath() {
-        return imgPath.get();
+        return imgPath;
     }
 
-    public void setImgPath(SimpleStringProperty imgPath) {
+    public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
     }
     
