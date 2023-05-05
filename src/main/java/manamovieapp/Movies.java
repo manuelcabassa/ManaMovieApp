@@ -24,6 +24,10 @@ public class Movies {
     private SimpleStringProperty cast;
     private SimpleStringProperty imgPath;
     private SimpleStringProperty isRented;
+    
+    public Movies(){
+        
+    }
 
     public Movies(String id, String title, String director, String writters, LocalDate releaseDate, String runningTime, String rated, String genre, String cast, String imgPath, String isrented) {
         this.Id = new SimpleStringProperty(id);

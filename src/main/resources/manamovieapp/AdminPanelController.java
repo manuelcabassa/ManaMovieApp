@@ -183,10 +183,11 @@ public class AdminPanelController implements Initializable {
     private TextArea txtAddMovieCast;
     @FXML
     private ImageView imageview;
-    
+
+    //Edit movie
     @FXML
     private ImageView imageview1;
-    
+
     @FXML
     private TextField txtEditMovieImage;
     @FXML
@@ -194,7 +195,7 @@ public class AdminPanelController implements Initializable {
 
     @FXML
     private AnchorPane editMoviePanel;
-    
+
     @FXML
     private TextField txtEditMovieDirector;
 
@@ -217,10 +218,34 @@ public class AdminPanelController implements Initializable {
     private TextField txtEditMovieWritters;
     @FXML
     private TextArea txtEditMovieCast;
-    
+
     @FXML
     private TextField txtEditMovieId;
+
+    //Delete movie
+    @FXML
+    private AnchorPane deleteMovie;
+
+    @FXML
+    private TextField txtDeleteMovieId;
+
+    @FXML
+    private TextField txtDeleteMovieReleaseDate;
+
+    @FXML
+    private TextField txtDeleteMovieRunningTime;
+
+    @FXML
+    private TextField txtDeleteMovieTitle;
     
+    //Rental movie
+    @FXML
+    private AnchorPane adminRentalPanel;
+    @FXML
+    private Button btnReturnMovie;
+    @FXML
+    private Button btnRentalMovie;
+
     private Image image;
     public String uri;
 
@@ -230,7 +255,6 @@ public class AdminPanelController implements Initializable {
     private Statement statement;
     private ResultSet result;
     Alert alert;
-
 
     //Customers admin panel
     public void customersView() throws SQLException {
@@ -559,7 +583,8 @@ public class AdminPanelController implements Initializable {
         }
 
     }
-        public void UploadEditImg() {
+
+    public void UploadEditImg() {
         FileChooser open = new FileChooser();
         open.setTitle("Open Image");
         open.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image File", "*png", "*jpg"));
@@ -633,7 +658,6 @@ public class AdminPanelController implements Initializable {
                 txtAddMovieGenre.setText("");
                 txtAddMovieCast.setText("");*/
                 //txtAddMovieImage.set
-
                 try {
                     tableViewMovie.setItems(getMovies());
                 } catch (SQLException ex) {
@@ -661,12 +685,9 @@ public class AdminPanelController implements Initializable {
     public void editMovie() {
         movieAdminPanel.setVisible(false);
         editMoviePanel.setVisible(true);
-        
-       
 
         Movies movie = tableViewMovie.getSelectionModel().getSelectedItem();
         int index = tableViewMovie.getSelectionModel().getSelectedIndex();
-         
 
         if ((index - 1) < -1) {
             editMoviePanel.setVisible(false);
@@ -681,7 +702,7 @@ public class AdminPanelController implements Initializable {
 
             movieAdminPanel.setVisible(false);
             editMoviePanel.setVisible(true);
-            
+
             txtEditMovieId.setText(movie.getId());
             txtEditMovieTitle.setText(movie.getTitle());
             txtEditMovieDirector.setText(movie.getDirector());
@@ -694,13 +715,13 @@ public class AdminPanelController implements Initializable {
             txtEditMovieImage.setText(movie.getImgPath());
             txtEditisRented.setText(movie.getIsRented());
             uri = movie.getImgPath();
-            
+
         }
 
     }
 
     public void btnEditMovie() throws SQLException {
-         uri = getData.path;
+        uri = getData.path;
         uri = uri.replace("\\", "\\\\");
 
         String sqlScript = "UPDATE movie SET title = ?, director = ?, writters = ?, releaseDate = ?, runningTime = ?, rated = ?, genre = ?, cast = ?, ImgPath = ?, isRented = ? WHERE idMovie = ? ";
@@ -724,32 +745,27 @@ public class AdminPanelController implements Initializable {
                 alert.setContentText("The id fields is empty or not found.");
                 alert.showAndWait();
             } else {
-            
 
-            prepare = connect.prepareStatement(sqlScript);
+                prepare = connect.prepareStatement(sqlScript);
 
-            
-            prepare.setString(1, txtEditMovieTitle.getText());
-            prepare.setString(2, txtEditMovieDirector.getText());
-            prepare.setString(3, txtEditMovieWritters.getText());
-            prepare.setString(4, txtEditMovieReleaseDate.getText());
-            prepare.setString(5, txtEditMovieRunningTime.getText());
-            prepare.setString(6, txtEditMovieRated.getText().toUpperCase());
-            prepare.setString(7, txtEditMovieGenre.getText());
-            prepare.setString(8, txtEditMovieCast.getText());
-            prepare.setString(9, uri);
-            prepare.setString(10, txtEditisRented.getText());
-            prepare.setString(11, txtEditMovieId.getText());
-                
-                
+                prepare.setString(1, txtEditMovieTitle.getText());
+                prepare.setString(2, txtEditMovieDirector.getText());
+                prepare.setString(3, txtEditMovieWritters.getText());
+                prepare.setString(4, txtEditMovieReleaseDate.getText());
+                prepare.setString(5, txtEditMovieRunningTime.getText());
+                prepare.setString(6, txtEditMovieRated.getText().toUpperCase());
+                prepare.setString(7, txtEditMovieGenre.getText());
+                prepare.setString(8, txtEditMovieCast.getText());
+                prepare.setString(9, uri);
+                prepare.setString(10, txtEditisRented.getText());
+                prepare.setString(11, txtEditMovieId.getText());
+
                 prepare.execute();
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
                 alert.setContentText("The record has succefully updated.");
                 alert.showAndWait();
-                
-                
 
                 try {
                     tableViewMovie.setItems(getMovies());
@@ -781,10 +797,97 @@ public class AdminPanelController implements Initializable {
     }
 
     public void deleteMovie() {
+        deleteMovie.setVisible(true);
+        movieAdminPanel.setVisible(false);
+
+        Movies movie = tableViewMovie.getSelectionModel().getSelectedItem();
+        int index = tableViewMovie.getSelectionModel().getSelectedIndex();
+
+        if ((index - 1) < -1) {
+            deleteMovie.setVisible(false);
+            movieAdminPanel.setVisible(true);
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("First select the row you want to edit.");
+            alert.showAndWait();
+            return;
+        } else {
+
+            deleteMovie.setVisible(true);
+            movieAdminPanel.setVisible(false);
+
+            txtDeleteMovieId.setText(movie.getId());
+            txtDeleteMovieTitle.setText(movie.getTitle());
+            txtDeleteMovieRunningTime.setText(movie.getRunningTime());
+            txtDeleteMovieReleaseDate.setText(movie.getReleaseDate().toString());
+
+        }
+
+    }
+
+    public void BtnDeleteMovie() throws SQLException {
+        
+        Movies movie = tableViewMovie.getSelectionModel().getSelectedItem();
+        int index = tableViewMovie.getSelectionModel().getSelectedIndex();
+        String sqlScript = "Delete from movie WHERE idMovie = ?";
+
+        connect = database.connectDb();
+
+        if (connect == null) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Error connection with database");
+            alert.showAndWait();
+        }
+
+        try {
+
+            prepare = connect.prepareStatement(sqlScript);
+            prepare.setString(1, txtDeleteMovieId.getText());
+
+            if (txtDeleteMovieId.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("The id fields is empty.");
+                alert.showAndWait();
+            } else {
+                prepare.execute();
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("The record has succefully delete.");
+                alert.showAndWait();
+
+                try {
+                    tableViewMovie.setItems(getMovies());
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdminPanelController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                movieAdminPanel.setVisible(true);
+                deleteMovie.setVisible(false);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connect.close();
+        }
 
     }
     
-    public void BtnDeleteMovie(){
+    public void adminRentalPanel(){
+        adminPanel.setVisible(false);
+        adminRentalPanel.setVisible(true);
+    }
+    
+    public void btnReturnMovie(){
+        
+    }
+        public void btnRentalMovie(){
         
     }
 
