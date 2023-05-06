@@ -4,6 +4,9 @@
  */
 package manamovieapp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Manuel
@@ -11,5 +14,10 @@ package manamovieapp;
 public class getData {
     
     public static String path;
+    public static String id;
+    public static String nameMovie;
+    public static List<String> movieTitles = new ArrayList<>();
+    public static Integer x;
+    
     
 }

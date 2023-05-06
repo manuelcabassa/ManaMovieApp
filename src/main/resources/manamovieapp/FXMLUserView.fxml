@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,9 +13,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1543.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manamovieapp.FXMLUserViewController">
+<AnchorPane id="AnchorPane" prefHeight="719.0" prefWidth="1543.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manamovieapp.FXMLUserViewController">
    <children>
-      <AnchorPane fx:id="MovieView" layoutX="57.0" layoutY="57.0" prefHeight="719.0" prefWidth="1543.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="MovieView" layoutX="57.0" layoutY="57.0" prefHeight="719.0" prefWidth="1543.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ChoiceBox fx:id="choiceBoxGenre" layoutX="44.0" layoutY="71.0" prefHeight="40.0" prefWidth="247.0" />
             <Label layoutX="44.0" layoutY="20.0" prefHeight="40.0" prefWidth="170.0" text="Select Genre:">
@@ -41,7 +43,7 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="337.0" layoutY="260.0" prefHeight="719.0" prefWidth="1543.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="detailPanel" layoutX="337.0" layoutY="260.0" prefHeight="719.0" prefWidth="1543.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="32.0" layoutY="34.0" text="Movie Details">
                <font>
@@ -49,48 +51,55 @@
                </font>
             </Label>
             <ImageView fitHeight="345.0" fitWidth="230.0" layoutX="49.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="523.0" layoutY="123.0" prefHeight="35.0" prefWidth="159.0" text="Title: ">
+            <Label layoutX="422.0" layoutY="118.0" prefHeight="35.0" prefWidth="159.0" text="Title: ">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="608.0" layoutY="115.0" prefHeight="40.0" prefWidth="231.0" />
-            <Label layoutX="523.0" layoutY="193.0" prefHeight="35.0" prefWidth="159.0" text="Title: ">
+            <TextField editable="false" layoutX="608.0" layoutY="115.0" prefHeight="40.0" prefWidth="231.0" />
+            <Label layoutX="422.0" layoutY="191.0" prefHeight="35.0" prefWidth="159.0" text="Director:">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="608.0" layoutY="188.0" prefHeight="40.0" prefWidth="231.0" />
-            <Label layoutX="962.0" layoutY="131.0" prefHeight="35.0" prefWidth="159.0" text="Title: ">
+            <TextField editable="false" layoutX="608.0" layoutY="176.0" prefHeight="40.0" prefWidth="231.0" />
+            <Label layoutX="962.0" layoutY="131.0" prefHeight="35.0" prefWidth="179.0" text="Running Time: ">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="1047.0" layoutY="123.0" prefHeight="40.0" prefWidth="231.0" />
-            <Label layoutX="962.0" layoutY="201.0" prefHeight="35.0" prefWidth="159.0" text="Title: ">
+            <TextField editable="false" layoutX="1163.0" layoutY="129.0" prefHeight="40.0" prefWidth="231.0" />
+            <Label layoutX="962.0" layoutY="201.0" prefHeight="35.0" prefWidth="159.0" text="Rated: ">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="1047.0" layoutY="196.0" prefHeight="40.0" prefWidth="231.0" />
-            <Label layoutX="524.0" layoutY="255.0" prefHeight="35.0" prefWidth="159.0" text="Title: ">
+            <TextField editable="false" layoutX="1163.0" layoutY="196.0" prefHeight="40.0" prefWidth="231.0" />
+            <Label layoutX="413.0" layoutY="257.0" prefHeight="35.0" prefWidth="159.0" text="Writters:">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="609.0" layoutY="247.0" prefHeight="40.0" prefWidth="231.0" />
-            <Label layoutX="524.0" layoutY="325.0" prefHeight="35.0" prefWidth="159.0" text="Title: ">
+            <TextField editable="false" layoutX="609.0" layoutY="246.0" prefHeight="40.0" prefWidth="231.0" />
+            <Label layoutX="413.0" layoutY="326.0" prefHeight="35.0" prefWidth="159.0" text="Release Date:">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="609.0" layoutY="320.0" prefHeight="40.0" prefWidth="231.0" />
-            <Label layoutX="963.0" layoutY="274.0" prefHeight="35.0" prefWidth="159.0" text="Title: ">
+            <TextField editable="false" layoutX="615.0" layoutY="320.0" prefHeight="40.0" prefWidth="231.0" />
+            <Label layoutX="963.0" layoutY="274.0" prefHeight="35.0" prefWidth="159.0" text="Genre: ">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="1048.0" layoutY="266.0" prefHeight="40.0" prefWidth="231.0" />
+            <TextField editable="false" layoutX="1163.0" layoutY="266.0" prefHeight="40.0" prefWidth="231.0" />
+            <Label layoutX="963.0" layoutY="332.0" prefHeight="35.0" prefWidth="159.0" text="Cast: ">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextArea editable="false" layoutX="1155.0" layoutY="350.0" prefHeight="254.0" prefWidth="247.0" />
+            <Button layoutX="698.0" layoutY="573.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="159.0" text="Rent Movie" />
          </children>
       </AnchorPane>
    </children>

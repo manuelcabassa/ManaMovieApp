@@ -13,7 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Movies {
     
-    private SimpleStringProperty Id;
+    private String Id;
     private SimpleStringProperty title;
     private SimpleStringProperty director;
     private SimpleStringProperty writters;
@@ -30,7 +30,7 @@ public class Movies {
     }
 
     public Movies(String id, String title, String director, String writters, LocalDate releaseDate, String runningTime, String rated, String genre, String cast, String imgPath, String isrented) {
-        this.Id = new SimpleStringProperty(id);
+        this.Id = id;
         this.title = new SimpleStringProperty(title);
         this.director = new SimpleStringProperty(director);
         this.writters = new SimpleStringProperty(writters);
@@ -46,10 +46,10 @@ public class Movies {
 
 
     public String getId() {
-        return Id.get();
+        return Id;
     }
 
-    public void setId(SimpleStringProperty Id) {
+    public void setId(String Id) {
         this.Id = Id;
     }
 

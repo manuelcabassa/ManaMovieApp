@@ -1,4 +1,10 @@
+manamovieapp\FXMLInitViewController.class
+manamovieapp\getData.class
 manamovieapp\Customers.class
+manamovieapp\itemController.class
+manamovieapp\FXMLUserViewController.class
 manamovieapp\database.class
+manamovieapp\MovieDetailController.class
 manamovieapp\Movies.class
+manamovieapp\AdminPanelController.class
 manamovieapp\App.class
