@@ -25,15 +25,15 @@ DROP TABLE IF EXISTS `client`;
 CREATE TABLE `client` (
   `idClient` int NOT NULL AUTO_INCREMENT,
   `firstName` varchar(45) NOT NULL,
-  `lastName` varchar(45) NOT NULL,
   `middleName` varchar(45) DEFAULT NULL,
-  `city` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
+  `address` varchar(100) NOT NULL,
   `dateOfBirth` date NOT NULL,
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `isAdmin` varchar(45) NOT NULL,
+  `isAdmin` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idClient`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
+INSERT INTO `client` VALUES (1,'Manuel','A','Cabassa','San Juan','1992-02-23','mcabassa','admin123','Y'),(2,'Joan','Marie','Alvarez','Camuy','1995-03-03','jalvarez','prueba1','Y'),(3,'test','test','test','test','2023-01-01','test','test123','N'),(4,'TEST100','test2','HolaPrueba','test2','2023-01-01','prueba','test2','Y'),(8,'Jomar','','Soto','San Juan','1994-02-08','jsoto','prueba123','N'),(10,'admin','','admin','N/A','2023-04-28','admin','12345','Y');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-18 17:18:31
+-- Dump completed on 2023-05-06 21:18:01

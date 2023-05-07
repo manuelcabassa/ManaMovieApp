@@ -30,7 +30,7 @@ CREATE TABLE `client_has_movies` (
   KEY `fk_Client_has_Movies_Movies1_idx` (`Movies_idMovie`),
   KEY `fk_Client_has_Movies_Client_idx` (`Client_idClient`),
   CONSTRAINT `fk_Client_has_Movies_Client` FOREIGN KEY (`Client_idClient`) REFERENCES `client` (`idClient`),
-  CONSTRAINT `fk_Client_has_Movies_Movies1` FOREIGN KEY (`Movies_idMovie`) REFERENCES `movies` (`idMovie`)
+  CONSTRAINT `fk_Client_has_Movies_Movies1` FOREIGN KEY (`Movies_idMovie`) REFERENCES `movie` (`idMovie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-18 17:18:31
+-- Dump completed on 2023-05-06 21:18:01
